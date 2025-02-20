@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Plus, Pencil, Trash2, Car, Users, Calendar, CheckCircle, LogOut, Upload, X } from 'lucide-react';
 import Layout from '../components/Layout';
 import { Car as CarType } from '../data/cars';
-import { API_URL } from '../config/api';
+import { API_URL, normalizeImageUrl } from '../config/api';
 
 interface Reservation {
   _id: string;
@@ -108,8 +108,7 @@ export default function AdminDashboard() {
       }
       
       const data = await response.json();
-      const fullImageUrl = data.imageUrl.startsWith('http') ? data.imageUrl : `${API_URL}${data.imageUrl}`;
-      setFormData(prev => ({ ...prev, image: fullImageUrl }));
+      setFormData(prev => ({ ...prev, image: normalizeImageUrl(data.imageUrl) }));
     } catch (error) {
       console.error('Error uploading image:', error);
       alert(error instanceof Error ? error.message : 'Failed to upload image. Please try again.');
@@ -158,13 +157,11 @@ export default function AdminDashboard() {
       }
       
       const data = await response.json();
-      const fullImageUrls = data.imageUrls.map((url: string) => 
-        url.startsWith('http') ? url : `${API_URL}${url}`
-      );
+      const normalizedUrls = data.imageUrls.map((url: string) => normalizeImageUrl(url));
       
       setFormData(prev => ({
         ...prev,
-        gallery: [...prev.gallery, ...fullImageUrls]
+        gallery: [...prev.gallery, ...normalizedUrls]
       }));
     } catch (error) {
       console.error('Error uploading gallery images:', error);
@@ -319,7 +316,6 @@ export default function AdminDashboard() {
     <Layout>
       <div className="min-h-screen bg-gray-50 py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          {/* Dashboard Header with Logout */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-6">
               <h1 className="text-3xl font-bold">Admin Dashboard</h1>
@@ -353,7 +349,6 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          {/* Tabs */}
           <div className="flex space-x-4 mb-6">
             <button
               onClick={() => setActiveTab('vehicles')}
@@ -377,9 +372,7 @@ export default function AdminDashboard() {
             </button>
           </div>
 
-          {/* Content */}
           {activeTab === 'vehicles' ? (
-            /* Vehicles Table */
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <div className="p-6 border-b border-gray-200">
                 <div className="flex justify-between items-center">
@@ -402,7 +395,6 @@ export default function AdminDashboard() {
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix/Jour</th>
-                     
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
@@ -412,7 +404,11 @@ export default function AdminDashboard() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="h-10 w-10 flex-shrink-0">
-                              <img className="h-10 w-10 rounded-full object-cover" src={vehicle.image} alt={vehicle.name} />
+                              <img 
+                                className="h-10 w-10 rounded-full object-cover" 
+                                src={normalizeImageUrl(vehicle.image)} 
+                                alt={vehicle.name}
+                              />
                             </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">{vehicle.name}</div>
@@ -423,7 +419,6 @@ export default function AdminDashboard() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900">{vehicle.price} DT</div>
                         </td>
-                        
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <div className="flex space-x-2">
                             <button
@@ -447,7 +442,6 @@ export default function AdminDashboard() {
               </div>
             </div>
           ) : (
-            /* Reservations Table */
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <div className="p-6 border-b border-gray-200">
                 <h2 className="text-xl font-semibold">Reservations Management</h2>
@@ -514,7 +508,6 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Add/Edit Vehicle Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
@@ -552,7 +545,6 @@ export default function AdminDashboard() {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={3}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
-                 
                 />
               </div>
 
@@ -561,7 +553,7 @@ export default function AdminDashboard() {
                 <div className="mt-1 flex items-center space-x-4">
                   {formData.image && (
                     <img 
-                      src={formData.image} 
+                      src={normalizeImageUrl(formData.image)} 
                       alt="Preview" 
                       className="w-24 h-24 object-cover rounded-lg"
                     />
@@ -589,7 +581,7 @@ export default function AdminDashboard() {
                     {formData.gallery.map((url, index) => (
                       <div key={index} className="relative group">
                         <img 
-                          src={url} 
+                          src={normalizeImageUrl(url)} 
                           alt={`Gallery ${index + 1}`} 
                           className="w-24 h-24 object-cover rounded-lg"
                         />
@@ -668,7 +660,6 @@ export default function AdminDashboard() {
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
                     required
                   >
-                    
                     <option value="Essence">essence</option>
                     <option value="Diesel">Diesel</option>
                   </select>
@@ -676,7 +667,6 @@ export default function AdminDashboard() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Consumption</label>
                   <input
@@ -691,11 +681,8 @@ export default function AdminDashboard() {
                     required
                   />
                 </div>
-              
-                
               </div>
 
-              {/* Add Popular Vehicle Checkbox before the form buttons */}
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -734,4 +721,3 @@ export default function AdminDashboard() {
     </Layout>
   );
 }
- 

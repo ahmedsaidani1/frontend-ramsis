@@ -150,7 +150,7 @@ export default function AdminDashboard() {
     });
 
     try {
-      const response = await fetch(`${API_URL}/api/upload-multiple`, {
+      const response = await fetch(`${API_URL}/upload-multiple`, {
         method: 'POST',
         body: formData,
       });

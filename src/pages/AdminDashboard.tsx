@@ -660,6 +660,7 @@ export default function AdminDashboard() {
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
                     required
                   >
+                    <option value="">Select Carburant</option>
                     <option value="Essence">essence</option>
                     <option value="Diesel">Diesel</option>
                   </select>

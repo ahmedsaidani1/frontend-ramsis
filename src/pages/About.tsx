@@ -16,7 +16,7 @@ export default function About() {
           <div className="absolute inset-0 bg-black/70"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">À Propos de Ramsis Rent a Car</h1>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">À Propos de Remsis Rent a Car</h1>
           <p className="text-xl text-white/90 max-w-3xl mx-auto">
             Votre partenaire de confiance pour la location de voitures en Tunisie.
           </p>
@@ -30,7 +30,7 @@ export default function About() {
             <div>
               <h2 className="text-3xl font-bold mb-6">Notre Mission</h2>
               <p className="text-gray-600 mb-8">
-                Chez <span className='text-red-600 '> Ramsis Rent a Car</span>, notre mission est de fournir une expérience de location de voiture exceptionnelle à nos clients. Nous nous engageons à offrir des véhicules de qualité, un service personnalisé et des tarifs compétitifs pour répondre à tous vos besoins de mobilité en Tunisie.
+                Chez <span className='text-red-600 '> Remsis Rent a Car</span>, notre mission est de fournir une expérience de location de voiture exceptionnelle à nos clients. Nous nous engageons à offrir des véhicules de qualité, un service personnalisé et des tarifs compétitifs pour répondre à tous vos besoins de mobilité en Tunisie.
               </p>
               <div className="space-y-4">
                 {[

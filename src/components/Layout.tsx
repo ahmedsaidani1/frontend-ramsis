@@ -17,7 +17,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center space-x-2">
               <Car className="w-6 h-6 md:w-8 md:h-8 text-red-600" />
-              <span className="text-xl md:text-2xl font-bold">Ramsis Rent a Car</span>
+              <span className="text-xl md:text-2xl font-bold">Remsis Rent a Car</span>
             </Link>
             
             <div className="hidden md:flex items-center space-x-8">
@@ -234,7 +234,7 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-8 md:mt-12 pt-6 md:pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-          <p>&copy; 2025 Ramsis Rent A car. Tous droits réservés.
+          <p>&copy; 2025 Remsis Rent A car. Tous droits réservés.
             <br />
             developed by <a href='https://www.facebook.com/profile.php?id=100011509725033' target="_blank" className='hover:text-white transition-colors hover:underline'>Ahmed Saidani</a>
           </p>

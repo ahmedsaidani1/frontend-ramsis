@@ -14,11 +14,12 @@ export default function AdminLogin() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (email ==='remsisrentacar@gmail.com' && password === 'carcar2525') {
+    if (email ==='ramsisrentacar@gmail.com' && password === 'carcar2525') {
       localStorage.setItem('isAdminAuthenticated', 'true');
       navigate('/admin');
     } else {
       setError('Invalid email or password');
+     
     }
   };
 

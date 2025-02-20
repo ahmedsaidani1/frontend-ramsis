@@ -17,7 +17,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center space-x-2">
               <Car className="w-6 h-6 md:w-8 md:h-8 text-red-600" />
-              <span className="text-xl md:text-2xl font-bold">CarRental</span>
+              <span className="text-xl md:text-2xl font-bold">Ramsis Rent a Car</span>
             </Link>
             
             <div className="hidden md:flex items-center space-x-8">
@@ -31,7 +31,7 @@ export default function Layout({ children }: LayoutProps) {
               <a href="tel:+21620190776" className="text-gray-400 hover:text-red-600 transition-colors">
                 <Phone className="w-5 h-5" />
               </a>
-              <a href="mailto:contact@carrental.tn" className="text-gray-400 hover:text-red-600 transition-colors">
+              <a href="mailto:ramsisrentacar@gmail.com" className="text-gray-400 hover:text-red-600 transition-colors">
                 <Mail className="w-5 h-5" />
               </a>
             </div>
@@ -106,7 +106,7 @@ export default function Layout({ children }: LayoutProps) {
               <div className="pt-4 border-t">
                 <div className="space-y-3">
                   <a 
-                    href="tel:+21652706788" 
+                    href="tel:+21620190776" 
                     className="flex items-center space-x-3 text-gray-600 hover:text-red-600 transition-colors py-2"
                   >
                     <Phone className="w-5 h-5" />
@@ -174,7 +174,7 @@ export default function Layout({ children }: LayoutProps) {
               Location de voitures en Tunisie aux meilleurs prix.
             </p>
             <div className="flex space-x-4 mt-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/profile.php?id=61573046490284" target="_blank" rel="noopener noreferrer">
                 <Facebook className="w-5 h-5 md:w-6 md:h-6 text-gray-400 hover:text-white transition-colors" />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">

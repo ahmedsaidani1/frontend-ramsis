@@ -1,6 +1,6 @@
 import { Users, Shield, Clock, Award, CheckCircle2 } from 'lucide-react';
 import Layout from '../components/Layout';
-
+import cars from '../assets/carsimg.webp'
 
 export default function About() {
   return (
@@ -48,7 +48,7 @@ export default function About() {
             </div>
             <div className="relative">
               <img 
-                src="" 
+                src={cars}
                 className="rounded-lg shadow-xl"
               />
               <div className="absolute -bottom-6 -left-6 bg-red-600 text-white p-6 rounded-lg">
@@ -65,7 +65,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: "5000+", label: "Clients Satisfaits", icon: Users },
+              { number: "2000+", label: "Clients Satisfaits", icon: Users },
               { number: "100%", label: "Sécurité", icon: Shield },
               { number: "24/7", label: "Support Client", icon: Clock },
               { number: "50+", label: "Véhicules", icon: Award }

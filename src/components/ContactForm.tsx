@@ -16,10 +16,10 @@ export default function ContactForm() {
     if (form.current) {
       emailjs
         .sendForm(
-          'service_srliagu', // Replace with your EmailJS service ID
-          'template_2s90nai', // Replace with your EmailJS template ID
+          'service_iqd19bq', // Replace with your EmailJS service ID
+          'template_p0dfejv', // Replace with your EmailJS template ID
           form.current,
-          'xkDpyw5oN2Fxj_Ace' // Replace with your EmailJS public key
+          'BzJ8laFhLZ8ArF2uH' // Replace with your EmailJS public key
         )
         .then(
           () => {
@@ -60,11 +60,11 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="font-medium">Téléphone</p>
-                    <a href="tel:+216 53552328" className="text-gray-600 hover:text-red-600">
+                    <a href="tel:+21653552328" className="text-gray-600 hover:text-red-600">
                       +216 53 552 328
                     </a>
                     <br />
-                    <a href="tel:+21652706788" className="text-gray-600 hover:text-red-600">
+                    <a href="tel:+21620190776" className="text-gray-600 hover:text-red-600">
                       +216 20 190 776
                     </a>
                     <br />
@@ -79,7 +79,7 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="font-medium">Email</p>
-                    <a href="mailto:contact@carrental.tn" className="text-gray-600 hover:text-red-600">
+                    <a href="mailto:ramsisrentacar@gmail.com" className="text-gray-600 hover:text-red-600">
                       ramsisrentacar@gmail.com
                     </a>
                   </div>
@@ -92,6 +92,9 @@ export default function ContactForm() {
                     <p className="font-medium">Adresse</p>
                     <p className="text-gray-600">
                       Chotrana , Tunisie
+                    </p>
+                    <p className="text-gray-600">
+                      Manzah 6 , Tunisie
                     </p>
                   </div>
                 </div>

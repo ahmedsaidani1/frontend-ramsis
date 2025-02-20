@@ -14,7 +14,7 @@ export default function AdminLogin() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (email ==='ahmed@gmail.com' && password === '123456') {
+    if (email ==='remsisrentacar@gmail.com' && password === 'carcar2525') {
       localStorage.setItem('isAdminAuthenticated', 'true');
       navigate('/admin');
     } else {

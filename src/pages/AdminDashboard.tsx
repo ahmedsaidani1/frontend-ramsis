@@ -81,6 +81,19 @@ export default function AdminDashboard() {
     const file = event.target.files?.[0];
     if (!file) return;
 
+    // Validate file size
+    if (file.size > 5 * 1024 * 1024) { // 5MB
+      alert('File size must be less than 5MB');
+      return;
+    }
+
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+      alert('Only JPG, PNG and GIF files are allowed');
+      return;
+    }
+
     setIsUploading(true);
     const formData = new FormData();
     formData.append('image', file);
@@ -90,10 +103,17 @@ export default function AdminDashboard() {
         method: 'POST',
         body: formData,
       });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Upload failed');
+      }
+      
       const data = await response.json();
       setFormData(prev => ({ ...prev, image: data.imageUrl }));
     } catch (error) {
       console.error('Error uploading image:', error);
+      alert(error instanceof Error ? error.message : 'Failed to upload image. Please try again.');
     } finally {
       setIsUploading(false);
     }
@@ -103,6 +123,26 @@ export default function AdminDashboard() {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
+    // Validate total number of files
+    if (files.length > 3) {
+      alert('You can only upload up to 3 images at once');
+      return;
+    }
+
+    // Validate each file
+    for (const file of Array.from(files)) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Each file must be less than 5MB');
+        return;
+      }
+
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        alert('Only JPG, PNG and GIF files are allowed');
+        return;
+      }
+    }
+
     setIsUploading(true);
     const formData = new FormData();
     Array.from(files).forEach(file => {
@@ -110,18 +150,24 @@ export default function AdminDashboard() {
     });
 
     try {
-      const response = await fetch(`${API_URL}/upload-multiple`, {
+      const response = await fetch(`${API_URL}/api/upload-multiple`, {
         method: 'POST',
         body: formData,
       });
-      const data = await response.json();
       
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Upload failed');
+      }
+      
+      const data = await response.json();
       setFormData(prev => ({
         ...prev,
         gallery: [...prev.gallery, ...data.imageUrls]
       }));
     } catch (error) {
       console.error('Error uploading gallery images:', error);
+      alert(error instanceof Error ? error.message : 'Failed to upload gallery images. Please try again.');
     } finally {
       setIsUploading(false);
     }
@@ -559,7 +605,7 @@ export default function AdminDashboard() {
                       className="hidden"
                     />
                   </label>
-                  {isUploading && <span className="text-gray-500 ml-4">Uploading...</span>}
+                  {isUploading && <span className="text-gray-500">Uploading...</span>}
                 </div>
               </div>
 

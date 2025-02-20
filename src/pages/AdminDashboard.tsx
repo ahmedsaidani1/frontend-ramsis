@@ -81,13 +81,11 @@ export default function AdminDashboard() {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // Validate file size
-    if (file.size > 5 * 1024 * 1024) { // 5MB
+    if (file.size > 5 * 1024 * 1024) {
       alert('File size must be less than 5MB');
       return;
     }
 
-    // Validate file type
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
     if (!allowedTypes.includes(file.type)) {
       alert('Only JPG, PNG and GIF files are allowed');
@@ -110,7 +108,8 @@ export default function AdminDashboard() {
       }
       
       const data = await response.json();
-      setFormData(prev => ({ ...prev, image: data.imageUrl }));
+      const fullImageUrl = data.imageUrl.startsWith('http') ? data.imageUrl : `${API_URL}${data.imageUrl}`;
+      setFormData(prev => ({ ...prev, image: fullImageUrl }));
     } catch (error) {
       console.error('Error uploading image:', error);
       alert(error instanceof Error ? error.message : 'Failed to upload image. Please try again.');
@@ -123,13 +122,11 @@ export default function AdminDashboard() {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
-    // Validate total number of files
     if (files.length > 3) {
       alert('You can only upload up to 3 images at once');
       return;
     }
 
-    // Validate each file
     for (const file of Array.from(files)) {
       if (file.size > 5 * 1024 * 1024) {
         alert('Each file must be less than 5MB');
@@ -161,9 +158,13 @@ export default function AdminDashboard() {
       }
       
       const data = await response.json();
+      const fullImageUrls = data.imageUrls.map((url: string) => 
+        url.startsWith('http') ? url : `${API_URL}${url}`
+      );
+      
       setFormData(prev => ({
         ...prev,
-        gallery: [...prev.gallery, ...data.imageUrls]
+        gallery: [...prev.gallery, ...fullImageUrls]
       }));
     } catch (error) {
       console.error('Error uploading gallery images:', error);
@@ -183,6 +184,12 @@ export default function AdminDashboard() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const formattedData = {
+        ...formData,
+        image: formData.image,
+        gallery: formData.gallery
+      };
+
       const url = isEditing 
         ? `${API_URL}/vehicles/${currentVehicle?._id}`
         : `${API_URL}/vehicles`;
@@ -194,16 +201,20 @@ export default function AdminDashboard() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formattedData),
       });
 
-      if (response.ok) {
-        fetchVehicles();
-        setIsModalOpen(false);
-        resetForm();
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to save vehicle');
       }
+
+      await fetchVehicles();
+      setIsModalOpen(false);
+      resetForm();
     } catch (error) {
       console.error('Error saving vehicle:', error);
+      alert(error instanceof Error ? error.message : 'Failed to save vehicle. Please try again.');
     }
   };
 

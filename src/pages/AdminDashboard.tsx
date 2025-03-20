@@ -545,6 +545,7 @@ export default function AdminDashboard() {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={3}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                  required
                 />
               </div>
 

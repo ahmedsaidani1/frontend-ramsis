@@ -139,19 +139,24 @@ export default function Layout({ children }: LayoutProps) {
               <div className="pt-4 border-t">
                 <h3 className="font-semibold mb-3">Nos Agences</h3>
                 <div className="space-y-3">
-                  <div className="flex items-center space-x-3 text-gray-600 py-2">
-                    <MapPinned className="w-4 h-4 flex-shrink-0" />
-                    <span>Tunis Carthage</span>
-                  </div>
-                  <div className="flex items-center space-x-3 text-gray-600 py-2">
-                    <MapPinned className="w-4 h-4 flex-shrink-0" />
-                    <span>Manzah 6</span>
-                  </div>
-                  <div className="flex items-center space-x-3 text-gray-600 py-2">
-                    <MapPinned className="w-4 h-4 flex-shrink-0" />
-                    <span>Chotrana</span>
-                  </div>
-                </div>
+  {[
+    { name: "Tunis Carthage", link: "https://www.google.com/maps/search/?api=1&query=Tunis+Carthage" },
+    { name: "Manzah 6", link: "https://maps.app.goo.gl/EjMDnB2zcKCyySZa7" },
+    { name: "Chotrana", link: "https://www.google.com/maps/search/?api=1&query=Chotrana" }
+  ].map((location, index) => (
+    <a
+      key={index}
+      href={location.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center space-x-3 text-gray-600 py-2 hover:text-blue-500"
+    >
+      <MapPinned className="w-4 h-4 flex-shrink-0" />
+      <span>{location.name}</span>
+    </a>
+  ))}
+</div>
+
               </div>
             </div>
           </div>

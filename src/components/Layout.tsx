@@ -199,22 +199,27 @@ export default function Layout({ children }: LayoutProps) {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Nos Agences</h3>
-            <ul className="space-y-2 text-sm md:text-base text-gray-400">
-              <li className="flex items-center space-x-2">
-                <MapPinned className="w-4 h-4" />
-                <span>Tunis Carthage</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <MapPinned className="w-4 h-4" />
-                <span>Manzah 6</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <MapPinned className="w-4 h-4" />
-                <span>Chotrana</span>
-              </li>
-            </ul>
-          </div>
+  <h3 className="text-lg font-semibold mb-4">Nos Agences</h3>
+  <ul className="space-y-2 text-sm md:text-base text-gray-400">
+    {[
+      { name: "Tunis Carthage", link: "https://www.google.com/maps/search/?api=1&query=Tunis+Carthage" },
+      { name: "Manzah 6", link: "https://maps.app.goo.gl/EjMDnB2zcKCyySZa7" },
+      { name: "Chotrana", link: "https://www.google.com/maps/search/?api=1&query=Chotrana" }
+    ].map((location, index) => (
+      <li key={index}>
+        <a
+          href={location.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center space-x-2 hover:text-blue-500"
+        >
+          <MapPinned className="w-4 h-4" />
+          <span>{location.name}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
 
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact</h3>

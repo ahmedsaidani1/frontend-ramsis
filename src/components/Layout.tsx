@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Car, Menu, X, Phone, Mail, MapPinned, Facebook, Instagram } from 'lucide-react';
+import {  Menu, X, Phone, Mail, MapPinned, Facebook, Instagram } from 'lucide-react';
+import logo from '../assets/logo.png'
 
 interface LayoutProps {
   children: ReactNode;
@@ -16,8 +17,7 @@ export default function Layout({ children }: LayoutProps) {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center space-x-2">
-              <Car className="w-6 h-6 md:w-8 md:h-8 text-red-600" />
-              <span className="text-xl md:text-2xl font-bold">Remsis Rent a Car</span>
+              <img src={logo} alt="logo remsis rent car" />
             </Link>
             
             <div className="hidden md:flex items-center space-x-8">

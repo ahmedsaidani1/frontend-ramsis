@@ -63,7 +63,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="p-4 md:p-6 overflow-y-auto h-full">
             <div className="flex justify-between items-center mb-6">
               <Link to="/" className="flex items-center space-x-2">
-                <span className="text-lg font-bold">Ramsis Rent a Car</span>
+              <img src={logo} className=" w-28 h-24"alt="logo remsis rent car" />
               </Link>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
